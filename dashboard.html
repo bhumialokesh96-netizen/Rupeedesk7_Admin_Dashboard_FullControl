@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Rupeedesk7 - Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Rupeedesk7 Admin</h1>
+    <div id="adminInfo"></div>
+    <button id="signOutBtn">Sign Out</button>
+  </header>
+
+  <nav class="nav">
+    <button id="tabUsers" class="active">Users</button>
+    <button id="tabInventory">Inventory</button>
+    <button id="tabSettings">Settings</button>
+  </nav>
+
+  <main id="mainArea">
+    <!-- Users tab -->
+    <section id="usersSection" class="tabContent">
+      <h2>Users</h2>
+      <div id="usersControls">
+        <button id="refreshUsers">Refresh</button>
+        <button id="addUserBtn">Add User</button>
+      </div>
+      <div id="usersList"></div>
+    </section>
+
+    <!-- Inventory tab -->
+    <section id="inventorySection" class="tabContent" style="display:none">
+      <h2>Inventory</h2>
+      <div id="inventoryControls">
+        <button id="refreshInv">Refresh</button>
+        <button id="addInvBtn">Add Message</button>
+      </div>
+      <div id="inventoryList"></div>
+    </section>
+
+    <!-- Settings tab -->
+    <section id="settingsSection" class="tabContent" style="display:none">
+      <h2>Settings</h2>
+      <label>Rate per SMS (₹): <input id="rateInput" type="number" step="0.01" /></label>
+      <label>Default daily limit: <input id="limitInput" type="number" /></label>
+      <button id="saveSettings">Save Settings</button>
+      <div id="settingsStatus"></div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal" style="display:none"></div>
+
+  <script type="module" src="./admin.js"></script>
+</body>
+</html>

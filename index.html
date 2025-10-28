@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Rupeedesk7 - Admin Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="card login-card">
+    <h2>Admin Login</h2>
+    <input id="email" type="email" placeholder="admin@example.com" />
+    <input id="password" type="password" placeholder="Password" />
+    <div class="row">
+      <button id="loginBtn">Login</button>
+      <button id="signupBtn">Create Admin (email/password)</button>
+    </div>
+    <p id="status"></p>
+  </div>
+
+  <script type="module">
+    import { auth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from './firebase.js';
+    const loginBtn = document.getElementById('loginBtn');
+    const signupBtn = document.getElementById('signupBtn');
+    const status = document.getElementById('status');
+
+    loginBtn.onclick = async () => {
+      status.textContent = 'Signing in...';
+      try {
+        const email = document.getElementById('email').value;
+        const pass = document.getElementById('password').value;
+        await signInWithEmailAndPassword(auth, email, pass);
+        window.location = 'dashboard.html';
+      } catch(e) {
+        status.textContent = e.message;
+      }
+    };
+
+    signupBtn.onclick = async () => {
+      status.textContent = 'Creating admin user...';
+      try {
+        const email = document.getElementById('email').value;
+        const pass = document.getElementById('password').value;
+        const userCred = await createUserWithEmailAndPassword(auth, email, pass);
+        status.innerHTML = 'User created. Now open dashboard and add this user to /admins collection (UID: ' + userCred.user.uid + ')';
+      } catch(e) {
+        status.textContent = e.message;
+      }
+    };
+  </script>
+</body>
+</html>
